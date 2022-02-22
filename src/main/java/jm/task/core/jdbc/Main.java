@@ -4,13 +4,11 @@ import jm.task.core.jdbc.GenerateRandomUser.GenerateUser;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
-
-import java.util.List;
+import jm.task.core.jdbc.util.Util;
 
 public class Main {
     public static void main(String[] args) {
         UserService userService = new UserServiceImpl();
-        List<User> list;
         userService.createUsersTable();
 
         for (int i = 0; i < 4; i++) {
@@ -23,6 +21,9 @@ public class Main {
             System.out.println(i);
         }
 
+
+        userService.cleanUsersTable();
         userService.dropUsersTable();
+        Util.getSessionFactory().close();
     }
 }
